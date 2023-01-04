@@ -1,0 +1,3 @@
+Comando para generar  migración:  Add-Migration Initial
+Comando para crear la base de datos: Update-Database
+Ver SQl server desde Visual Studio: Ver -> Explorador de objetos SQL Server
