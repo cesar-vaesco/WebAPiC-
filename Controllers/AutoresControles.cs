@@ -26,10 +26,39 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet("primero")]
-        public async Task<ActionResult<Autor>> primerAutor() 
+        public async Task<ActionResult<Autor>> primerAutor()
         {
             return await context.Autores.FirstOrDefaultAsync();
         }
+
+        [HttpGet("{id:int}")] //https://localhost:7182/api/autores/2
+        public async Task<ActionResult<Autor>> Get(int id)
+        {
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (autor == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(autor);
+        }
+
+        //parametro opcional en la ruta 
+        //[HttpGet("{nombre}/{param2?}")] //https://localhost:7182/api/autores/{nombre} https://localhost:7182/api/autores/César
+        [HttpGet("{nombre}/{params2=persona}")] //param2 con un valor por defecto
+        public async Task<ActionResult<Autor>> GetNombreAutor(string nombre)
+        {
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Name.Contains(nombre));
+
+            if (autor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(autor);
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> Post(Autor autor)
