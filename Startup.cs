@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace WebApiAutores
 {
@@ -16,7 +17,8 @@ namespace WebApiAutores
         //Configuración de los servicios
         public void ConfigureServices(IServiceCollection services) 
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => 
+                                                                                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //Configurando el DbContext de la app
             services.AddDbContext<ApplicationDBContext>(options => 
