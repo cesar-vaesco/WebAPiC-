@@ -12,6 +12,7 @@ namespace WebApiAutores.Controllers
     {
 
         private readonly ApplicationDBContext context;
+
         public AutoresControles(ApplicationDBContext context)
         {
             this.context = context;
@@ -20,13 +21,13 @@ namespace WebApiAutores.Controllers
         [HttpGet]// api/listado
         [HttpGet("listado")]// api/autores/listado
         [HttpGet("/listado")] //listado
-        public async Task<ActionResult<List<Autor>>> Get()
+        public async Task<List<Autor>> Get()
         {
             return await context.Autores.Include(x => x.libros).ToListAsync();
         }
 
-        [HttpGet("primero")]
-        public async Task<ActionResult<Autor>> primerAutor()
+        [HttpGet("primero")] //api/autores/primero?nombre=""
+        public async Task<ActionResult<Autor>> primerAutor([FromHeader] int miValor, [FromQuery] string nombre)
         {
             return await context.Autores.FirstOrDefaultAsync();
         }
@@ -36,7 +37,7 @@ namespace WebApiAutores.Controllers
         {
             var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (autor == null) 
+            if (autor == null)
             {
                 return NotFound();
             }
@@ -46,7 +47,7 @@ namespace WebApiAutores.Controllers
 
         //parametro opcional en la ruta 
         //[HttpGet("{nombre}/{param2?}")] //https://localhost:7182/api/autores/{nombre} https://localhost:7182/api/autores/César
-        [HttpGet("{nombre}/{params2=persona}")] //param2 con un valor por defecto
+        [HttpGet("{nombre}/{params2=persona}")] //param2 con un valor por defecto https://localhost:7182/api/autores/Gloria/carro
         public async Task<ActionResult<Autor>> GetNombreAutor(string nombre)
         {
             var autor = await context.Autores.FirstOrDefaultAsync(x => x.Name.Contains(nombre));
@@ -56,7 +57,7 @@ namespace WebApiAutores.Controllers
                 return NotFound();
             }
 
-            return Ok(autor);
+            return autor;
         }
 
 

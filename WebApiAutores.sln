@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		Notas.txt = Notas.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba", "..\Prueba\Prueba.csproj", "{234305B2-E39F-4A72-A6D0-EDDA84558671}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{04A8537B-7CE7-469E-99B9-4E342FF1FE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A8537B-7CE7-469E-99B9-4E342FF1FE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A8537B-7CE7-469E-99B9-4E342FF1FE11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234305B2-E39F-4A72-A6D0-EDDA84558671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234305B2-E39F-4A72-A6D0-EDDA84558671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234305B2-E39F-4A72-A6D0-EDDA84558671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234305B2-E39F-4A72-A6D0-EDDA84558671}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

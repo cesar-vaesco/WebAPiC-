@@ -4,4 +4,4 @@ Ver SQl server desde Visual Studio: Ver -> Explorador de objetos SQL Server
 
 Comando para generar  migración y crear la tabla Libros:  Add-Migration Libros
 Comando para crear la base de datos: Update-Database
-	Esto envía los cambios hacia la base de datos 
+Esto envía los cambios hacia la base de datos 
