@@ -9,7 +9,7 @@ namespace WebApiAutores
     public class Startup
     {
         //Constructor
-        public Startup(IConfiguration configuration) 
+        public Startup(IConfiguration configuration)
         {
 
 
@@ -20,34 +20,39 @@ namespace WebApiAutores
 
 
         //Configuración de los servicios
-        public void ConfigureServices(IServiceCollection services) 
+        public void ConfigureServices(IServiceCollection services)
         {
 
 
 
 
-            services.AddControllers().AddJsonOptions(x => 
+            services.AddControllers().AddJsonOptions(x =>
                                                                                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //Configurando el DbContext de la app
-            services.AddDbContext<ApplicationDBContext>(options => 
+            services.AddDbContext<ApplicationDBContext>(options =>
                                                                                             options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
             /*La web api puede hacer de dos implementaciones de servicios para mostrar la inyección de dependencias*/
-            //services.AddSingleton<IServicio, ServicioA>();
-            services.AddSingleton<IServicio, ServicioB>();
+            //services.AddSingleton<IServicio, ServicioB>();
+            services.AddTransient<IServicio, ServicioA>();
 
-          
+            services.AddTransient<ServiciosTransient>();
+            services.AddScoped<ServiciosScoped>();
+            services.AddSingleton<ServiciosSingleton>();
+
+
 
             //services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen(c =>{
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tuto C# - ASP - WebAPIAutores", Version = "V1"});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tuto C# - ASP - WebAPIAutores", Version = "V1" });
             });
 
         }
 
         // Configurar los middleware
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             // Configure the HTTP request pipeline.
@@ -63,8 +68,9 @@ namespace WebApiAutores
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => {
-            
+            app.UseEndpoints(endpoints =>
+            {
+
                 endpoints.MapControllers();
 
             });

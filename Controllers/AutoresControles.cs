@@ -14,12 +14,36 @@ namespace WebApiAutores.Controllers
 
         private readonly ApplicationDBContext context;
         private readonly IServicio servicio;
+        private readonly ServiciosTransient serviciosTransient;
+        private readonly ServiciosScoped serviciosScoped;
+        private readonly ServiciosSingleton serviciosSingleton;
 
-        public AutoresControles(ApplicationDBContext context, IServicio servicio)
+        public AutoresControles(ApplicationDBContext context,
+                                        IServicio servicio, ServiciosTransient serviciosTransient,
+                                        ServiciosScoped serviciosScoped, ServiciosSingleton serviciosSingleton)
         {
 
             this.servicio = servicio;
+            this.serviciosTransient = serviciosTransient;
+            this.serviciosScoped = serviciosScoped;
+            this.serviciosSingleton = serviciosSingleton;
             this.context = context;
+        }
+
+        [HttpGet("GUID")]
+        public ActionResult obtenerGuids()
+        {
+
+            return Ok(new
+            {
+                AutoresController_Trasient = serviciosTransient.Guid,
+                ServicioA_Transient = servicio.ObtenerTransient(),
+                AutoresControles_Scoped = serviciosScoped.Guid,
+                ServicioA_Scoped = servicio.ObtenerScoped(),
+                AutoresControles_Singleton = serviciosSingleton.Guid,
+                ServicioA_Singleton = servicio.ObtenerSingleton()
+            });
+
         }
 
         [HttpGet]// api/listado
@@ -68,7 +92,7 @@ namespace WebApiAutores.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]Autor autor)
+        public async Task<ActionResult> Post([FromBody] Autor autor)
         {
 
             var existeAutorConMismoNombre = await context.Autores.AnyAsync(x => x.Name == autor.Name);
