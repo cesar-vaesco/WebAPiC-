@@ -1,4 +1,4 @@
-
+using Microsoft.Extensions.Logging;
 using WebApiAutores;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +10,8 @@ startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
-startup.Configure(app, app.Environment);
+var logger = app.Services.GetService(typeof(ILogger<Startup>)) as ILogger<Startup>;
+startup.Configure(app, app.Environment, logger);
+
 
 app.Run();
