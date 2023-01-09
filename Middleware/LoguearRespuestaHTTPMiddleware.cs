@@ -1,5 +1,16 @@
 ﻿namespace WebApiAutores.Middleware
 {
+
+
+    public static class LoguearRespuestaHTTPMiddlewareExtensions 
+    {
+        public static IApplicationBuilder UseLoguearRespuestaHTTP(this IApplicationBuilder app) 
+        {
+            return app.UseMiddleware<LoguearRespuestaHTTPMiddleware>();
+        }
+    }
+
+
     public class LoguearRespuestaHTTPMiddleware
     {
         private readonly RequestDelegate siguiente;

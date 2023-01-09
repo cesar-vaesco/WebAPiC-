@@ -17,7 +17,7 @@ namespace WebApiAutores
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-           
+
         }
 
         public IConfiguration Configuration { get; }
@@ -117,7 +117,8 @@ namespace WebApiAutores
             #endregion
             //Middleware que limira a la ruta /ruta1  interceptando la petición
 
-            app.UseMiddleware<LoguearRespuestaHTTPMiddleware>();   
+            //app.UseMiddleware<LoguearRespuestaHTTPMiddleware>();   
+            app.UseLoguearRespuestaHTTP();
 
             app.Map("/ruta1", app =>
             {
