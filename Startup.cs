@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using WebApiAutores.Controllers;
+using WebApiAutores.Filtros;
 using WebApiAutores.Middleware;
 using WebApiAutores.Servicios;
 
@@ -42,6 +43,9 @@ namespace WebApiAutores
             services.AddTransient<ServiciosTransient>();
             services.AddScoped<ServiciosScoped>();
             services.AddSingleton<ServiciosSingleton>();
+
+            //filtro de accion inyectado como dependencia - ya inyectado ya se puede usar
+            services.AddTransient<MiFiltroDeAccion>();
 
             services.AddResponseCaching();
 

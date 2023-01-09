@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
+using WebApiAutores.Filtros;
 using WebApiAutores.Servicios;
 
 namespace WebApiAutores.Controllers
@@ -38,6 +39,7 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet("GUID")]
+        [ServiceFilter(typeof(MiFiltroDeAccion))]
         [ResponseCache(Duration = 10)]
         public ActionResult obtenerGuids()
         {
@@ -58,7 +60,8 @@ namespace WebApiAutores.Controllers
         [HttpGet("listado")]// api/autores/listado
         [HttpGet("/listado")] //listado
         [ResponseCache(Duration = 10)]
-        [Authorize] //Validacion de autorización a nivel petición
+        [ServiceFilter(typeof(MiFiltroDeAccion))]
+        //[Authorize] //Validacion de autorización a nivel petición
         public async Task<List<Autor>> Get()
         {
             logger.LogInformation("Estamos obteniendo los autores");
@@ -70,12 +73,14 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet("primero")] //api/autores/primero?nombre=""
+        [ServiceFilter(typeof(MiFiltroDeAccion))]
         public async Task<ActionResult<Autor>> primerAutor([FromHeader] int miValor, [FromQuery] string nombre)
         {
             return await context.Autores.FirstOrDefaultAsync();
         }
 
         [HttpGet("{id:int}")] //https://localhost:7182/api/autores/2
+        [ServiceFilter(typeof(MiFiltroDeAccion))]
         public async Task<ActionResult<Autor>> Get(int id)
         {
             var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
