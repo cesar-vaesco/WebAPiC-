@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using WebApiAutores.Controllers;
+using WebApiAutores.Middleware;
 using WebApiAutores.Servicios;
 
 namespace WebApiAutores
@@ -58,7 +59,8 @@ namespace WebApiAutores
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
 
-
+            #region middleware_reubicado
+            /*
             app.Use(async (contexto, siguiente) =>
             {
 
@@ -111,9 +113,12 @@ namespace WebApiAutores
                 logger.LogInformation(respuesta);
                 
             });
-
-
+            */
+            #endregion
             //Middleware que limira a la ruta /ruta1  interceptando la petición
+
+            app.UseMiddleware<LoguearRespuestaHTTPMiddleware>();   
+
             app.Map("/ruta1", app =>
             {
                 // Ejemplo de middleware que intercepta la ejecución de la aplicación...
