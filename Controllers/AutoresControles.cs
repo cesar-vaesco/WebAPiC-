@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
 using WebApiAutores.Servicios;
@@ -9,6 +10,7 @@ namespace WebApiAutores.Controllers
     [ApiController]
     //[Route("api/[controller]")]
     [Route("api/autores")]
+    //[Authorize] Validacion de autorización global
     public class AutoresControles : ControllerBase
     {
 
@@ -56,6 +58,7 @@ namespace WebApiAutores.Controllers
         [HttpGet("listado")]// api/autores/listado
         [HttpGet("/listado")] //listado
         [ResponseCache(Duration = 10)]
+        [Authorize] //Validacion de autorización a nivel petición
         public async Task<List<Autor>> Get()
         {
             logger.LogInformation("Estamos obteniendo los autores");
