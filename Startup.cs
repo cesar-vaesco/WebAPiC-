@@ -29,7 +29,11 @@ namespace WebApiAutores
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers().AddJsonOptions(x =>
+            services.AddControllers(opciones =>
+            { //Agregando de manera global el filtro de excepción
+                opciones.Filters.Add(typeof(FiltroDeException));
+            }
+            ).AddJsonOptions(x =>
                                                                                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //Configurando el DbContext de la app

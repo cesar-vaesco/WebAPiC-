@@ -64,6 +64,8 @@ namespace WebApiAutores.Controllers
         //[Authorize] //Validacion de autorización a nivel petición
         public async Task<List<Autor>> Get()
         {
+
+            throw new NotImplementedException();
             logger.LogInformation("Estamos obteniendo los autores");
             logger.LogWarning("Este es un mensaje de prueba de warning");
             logger.LogCritical("Este es un mensaje de prueba critico");
