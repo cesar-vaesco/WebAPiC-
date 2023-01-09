@@ -36,6 +36,7 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet("GUID")]
+        [ResponseCache(Duration = 10)]
         public ActionResult obtenerGuids()
         {
 
@@ -54,6 +55,7 @@ namespace WebApiAutores.Controllers
         [HttpGet]// api/listado
         [HttpGet("listado")]// api/autores/listado
         [HttpGet("/listado")] //listado
+        [ResponseCache(Duration = 10)]
         public async Task<List<Autor>> Get()
         {
             logger.LogInformation("Estamos obteniendo los autores");

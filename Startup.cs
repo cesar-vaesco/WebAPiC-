@@ -27,9 +27,6 @@ namespace WebApiAutores
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-
-
             services.AddControllers().AddJsonOptions(x =>
                                                                                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,6 +42,7 @@ namespace WebApiAutores
             services.AddScoped<ServiciosScoped>();
             services.AddSingleton<ServiciosSingleton>();
 
+            services.AddResponseCaching();
 
 
             //services.AddEndpointsApiExplorer();
@@ -141,6 +139,8 @@ namespace WebApiAutores
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthorization();
 
