@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text.Json.Serialization;
+using WebApiAutores.Servicios;
 
 namespace WebApiAutores
 {
@@ -8,6 +11,8 @@ namespace WebApiAutores
         //Constructor
         public Startup(IConfiguration configuration) 
         {
+
+
             Configuration = configuration;
         }
 
@@ -17,14 +22,27 @@ namespace WebApiAutores
         //Configuración de los servicios
         public void ConfigureServices(IServiceCollection services) 
         {
+
+
+
+
             services.AddControllers().AddJsonOptions(x => 
                                                                                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //Configurando el DbContext de la app
             services.AddDbContext<ApplicationDBContext>(options => 
                                                                                             options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+
+            /*La web api puede hacer de dos implementaciones de servicios para mostrar la inyección de dependencias*/
+            //services.AddSingleton<IServicio, ServicioA>();
+            services.AddSingleton<IServicio, ServicioB>();
+
+          
+
+            //services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(c =>{
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tuto C# - ASP - WebAPIAutores", Version = "V1"});
+            });
 
         }
 
