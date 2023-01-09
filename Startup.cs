@@ -50,6 +50,8 @@ namespace WebApiAutores
 
             //filtro de accion inyectado como dependencia - ya inyectado ya se puede usar
             services.AddTransient<MiFiltroDeAccion>();
+            services.AddHostedService<EscribirEnArchivo>();
+
 
             services.AddResponseCaching();
 
