@@ -12,7 +12,6 @@ namespace WebApiAutores
 {
     public class Startup
     {
-        private readonly ILogger<Startup> logger;
 
         //Constructor
         public Startup(IConfiguration configuration)
@@ -36,7 +35,7 @@ namespace WebApiAutores
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //Configurando el DbContext de la app
             services.AddDbContext<ApplicationDBContext>(options =>
-                                                        options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+                        options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
             services.AddResponseCaching();
 
@@ -54,7 +53,7 @@ namespace WebApiAutores
         // Configurar los middleware
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-          
+
             // Configure the HTTP request pipeline.
             if (env.IsDevelopment())
             {
