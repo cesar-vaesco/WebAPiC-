@@ -8,7 +8,5 @@ namespace WebApiAutores.Entidades
 
         [PrimeraLetraMayuscula]
         public string Titulo { get; set; }
-        public int AutorId { get; set; }
-        public Autor Autor { get; set;}
     }
 }

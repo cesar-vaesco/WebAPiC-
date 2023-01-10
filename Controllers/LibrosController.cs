@@ -15,33 +15,33 @@ namespace WebApiAutores.Controllers
             this.context = context;
         }
 
-        [HttpGet("id:int")]
-        public async Task<ActionResult<Libro>> Get(int id) 
-        {
+        //[HttpGet("id:int")]
+        //public async Task<ActionResult<Libro>> Get(int id) 
+        //{
 
-            var existe = await context.Libros.AnyAsync(x => x.Id == id);
-            if (!existe)
-            {
-                return NotFound();
-            }
+        //    var existe = await context.Libros.AnyAsync(x => x.Id == id);
+        //    if (!existe)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return await context.Libros.Include(x => x.Autor).FirstOrDefaultAsync(x => x.Id == id);
-        }
+        //    return await context.Libros.Include(x => x.Autor).FirstOrDefaultAsync(x => x.Id == id);
+        //}
 
-        [HttpPost]
-        public async Task<ActionResult> Post(Libro libro)
-        {
+        //[HttpPost]
+        //public async Task<ActionResult> Post(Libro libro)
+        //{
 
-            var existeAutor = await context.Autores.AnyAsync(x => x.Id ==  libro.AutorId);
-            if (!existeAutor)
-            {
-                return BadRequest($"No existe el autor de Id:  {libro.AutorId}"); 
-             }
+        //    var existeAutor = await context.Autores.AnyAsync(x => x.Id ==  libro.AutorId);
+        //    if (!existeAutor)
+        //    {
+        //        return BadRequest($"No existe el autor de Id:  {libro.AutorId}"); 
+        //     }
 
-            context.Add(libro);
-            context.SaveChanges();
-            return Ok();
-        }
+        //    context.Add(libro);
+        //    context.SaveChanges();
+        //    return Ok();
+        //}
 
     }
 }
